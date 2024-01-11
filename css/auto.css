@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+body {
+    margin: -30;
+    padding: 0;
+    font-family: 'Quicksand', sans-serif;
+}
+nav {
+    background-color:rgba(93, 173, 226, 0.801);
+    padding: 10px;
+    position: fixed;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    top: 0;
+    height: 50px;
+    display: flex;
+    font-size: large;
+}
+
+img {
+    width: 240px;
+}
+nav img{
+    width: 120px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+}
+.row {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px;
+}
+
+.cars {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #d7d7d7;
+    margin-bottom: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    width: calc(25% - 20px);
+    max-width: 400px;
+    box-sizing: border-box;
+    margin-top: 70px;
+
+}
+
+.cars:hover {
+    transform: scale(1.05);
+}
+
+
+h2 {
+    color: #333;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+p {
+    margin: 8px 0;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+    border-radius: 8px;
+}
+ 
