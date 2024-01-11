@@ -103,27 +103,7 @@ $resterendeDagen = $huidigeDatum->diff($eindVerhuurdatum)->format("%a");
     }
     ?>
     <br>
-    <!-- <footer>
-        <div class="footer-content">
-            <h3>Contactgegevens</h3>
-            <p><strong>Openingstijden:</strong></p>
-            <p>Ma t/m zo: 7.00 uur - 23.00 uur</p>
-            <a href="https://www.google.com/maps/place/Carnapstraat+118,+1062+KT+Amsterdam/@52.3546881,4.8370766,17z/data=!3m1!4b1!4m6!3m5!1s0x47c5e3bde195bcb9:0x38539b6003b5add5!8m2!3d52.3546849!4d4.8396515!16s%2Fg%2F11rtl_lknq?entry=ttu">
-                <p> <strong>Adres:</strong> Carnapstraat 118, Amsterdam</p>
-            </a>
-            <a href="mailto:info@car4you.com">
-                <p>Email: Info@car4you.com</p>
-            </a>
-            <a href="tel:+31687989245">Telefoon: 123-456789</a>
 
-        </div>
-        <div class="footer-content">
-            <h3>Volg ons</h3>
-            <p><i class="bi bi-facebook"></i>Facebook</p>
-            <p><i class="bi bi-twitter-x"></i>Twitter</p>
-            <p><i class="bi bi-instagram"></i>Instagram</p>
-        </div>
-    </footer> -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         $(document).ready(function() {
