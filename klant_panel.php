@@ -56,7 +56,6 @@ $resterendeDagen = $huidigeDatum->diff($eindVerhuurdatum)->format("%a");
             <ul class="hamburger_menu">
                 <li> <a class="menu_item" href="gegevens.php">Gegevens</a></li>
                 <li> <a class="menu_item" href="verhuring.php">Auto verhuren</a></li>
-                <li> <a class="menu_item" href="view_beschikbaar_auto's _klant.php">beschikbare Auto's</a></li>
                 <li> <a class="menu_item" href="auto's.php">Auto's</a></li>
                 <li> <a class="menu_item" href="factuur.php">Factuur</a></li>
                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-power" id="logoutBtn" style="margin-top: 250px; margin-left:70px" color="red" viewBox="0 0 16 16">
@@ -74,12 +73,17 @@ $resterendeDagen = $huidigeDatum->diff($eindVerhuurdatum)->format("%a");
             <p><strong>Merk:</strong> <?php echo $reservedCars['Merk']; ?></p>
             <p><strong>Model:</strong> <?php echo $reservedCars['Model']; ?></p>
             <p><strong>Jaar:</strong> <?php echo $reservedCars['Jaar']; ?></p>
-            <p><strong>Kenteken:</strong> <?php echo $reservedCars['Kenteken']; ?></p>
             <p><strong>Kilometerstand:</strong> <?php echo $reservedCars['kmafstand']; ?> km</p>
             <p><strong>Kleur:</strong> <?php echo $reservedCars['Color']; ?></p>
             <p><strong>Transmissie:</strong> <?php echo $reservedCars['Transmissie']; ?></p>
             <p><strong>Prijs: €</strong> <?php echo $reservedCars['Prijs']; ?> per dag</p>
             <img src="<?= $reservedCars['imagename'] ?>" />
+            <div class="kenteken2" style="margin-left: 45px;">
+                <div class="inset2">
+                    <div class="blue2"></div>
+                    <input type="text" value="<?php echo $reservedCars['Kenteken']; ?>" disabled />
+                </div>
+            </div>
            <strong> <p>Resterende dagen: <?php echo $resterendeDagen; ?> dagen</p></strong>
             <br>
             

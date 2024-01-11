@@ -34,12 +34,17 @@ foreach ($carsData as $carData) {
             <p>Merk: <?php echo $carData['Merk']; ?></p>
             <p>Model: <?php echo $carData['Model']; ?></p>
             <p>Jaar: <?php echo $carData['Jaar']; ?></p>
-            <p>Kenteken: <?php echo $carData['Kenteken']; ?></p>
             <p>Kilometerstand: <?php echo $carData['kmafstand']; ?> km</p>
             <p>Kleur: <?php echo $carData['Color']; ?></p>
             <p>Transmissie: <?php echo $carData['Transmissie']; ?></p>
             <p>Prijs: € <?php echo $carData['Prijs']; ?> per dag</p>
             <img src="<?= $carData['imagename'] ?>" />
+            <div class="kenteken2" style="margin-left: 20px;">
+                <div class="inset2">
+                    <div class="blue2"></div>
+                    <input type="text" value="<?php echo $carData['Kenteken']; ?>" disabled />
+                </div>
+            </div>
             <br>
         </div>
 

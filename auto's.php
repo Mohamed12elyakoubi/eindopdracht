@@ -34,7 +34,6 @@ foreach ($carsData as $carData) {
                 </svg></a>
                 <li> <a class="menu_item" href="gegevens.php">Gegevens</a></li>
                 <li> <a class="menu_item" href="verhuring.php">Auto verhuren</a></li>
-                <li> <a class="menu_item" href="view_beschikbaar_auto's _klant.php">beschikbare Auto's</a></li>
                 <li> <a class="menu_item" href="auto's.php">Auto's</a></li>
                 <li> <a class="menu_item" href="factuur.php">Factuur</a></li>
                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-power" id="logoutBtn" style="margin-top: 250px; margin-left:70px" color="red" viewBox="0 0 16 16">
@@ -49,12 +48,17 @@ foreach ($carsData as $carData) {
             <p>Merk: <?php echo $carData['Merk']; ?></p>
             <p>Model: <?php echo $carData['Model']; ?></p>
             <p>Jaar: <?php echo $carData['Jaar']; ?></p>
-            <p>Kenteken: <?php echo $carData['Kenteken']; ?></p>
             <p>Kilometerstand: <?php echo $carData['kmafstand']; ?> km</p>
             <p>Kleur: <?php echo $carData['Color']; ?></p>
             <p>Transmissie: <?php echo $carData['Transmissie']; ?></p>
             <p>Prijs: € <?php echo $carData['Prijs']; ?> per dag</p>
             <img src="<?= $carData['imagename'] ?>" />
+            <div class="kenteken2" style="margin-left: 20px;">
+                <div class="inset2">
+                    <div class="blue2"></div>
+                    <input type="text" value="<?php echo $carData['Kenteken']; ?>" disabled />
+                </div>
+            </div>
             <br>
         </div>
 

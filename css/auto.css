@@ -4,6 +4,7 @@ body {
     margin: -30;
     padding: 0;
     font-family: 'Quicksand', sans-serif;
+
 }
 nav {
     background-color:rgba(93, 173, 226, 0.801);
@@ -32,8 +33,9 @@ nav a {
 }
 .row {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     margin: 30px;
+    flex-wrap: wrap;
 }
 
 .cars {
@@ -41,14 +43,13 @@ nav a {
     border-radius: 8px;
     background-color: #d7d7d7;
     margin-bottom: 10px;
-    padding: 15px;
+    padding: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
-    width: calc(25% - 20px);
-    max-width: 400px;
+    width: 300px;
+    max-width: 700px;
     box-sizing: border-box;
     margin-top: 70px;
-
 }
 
 .cars:hover {
@@ -72,4 +73,56 @@ img {
     margin-top: 10px;
     border-radius: 8px;
 }
- 
+@import url('http://fonts.cdnfonts.com/css/kenteken');
+
+::placeholder {
+  color: rgba(0,0,0,.15);
+}
+
+.kenteken2 {
+  position: relative;
+  background: #f3bd00;
+  width: 230px;
+  height: 40px;
+  padding: 2px;
+  border-radius: 5px;
+  box-shadow: 0 0 6px rgba(0,0,0,.3);
+}
+
+.inset2 {
+  border: 1px solid #333;
+  border-radius: 4px;
+  width: auto;
+  height: 38px;
+  position: relative;
+  display: flex;
+}
+
+.kenteken2 .inset2 .blue2 {
+  width: 24px;
+  height: 38px;
+  background: #003399;
+  border-right: 1px solid #333;
+  background-image: url('https://i.ibb.co/r7SZP4h/NLD1-01.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.kenteken2 .inset2 input {
+  text-transform: uppercase;
+  background: 0;
+  border: 0;
+  outline: 0;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  width: calc(100% - 25px);
+  font-size: 23.5px;
+  letter-spacing: 3px;
+  line-height: 38px;
+  font-family: 'Kenteken', sans-serif;
+  background-image: url('https://svgshare.com/i/VU4.svg');
+  background-repeat: no-repeat;
+  background-size: auto;
+}

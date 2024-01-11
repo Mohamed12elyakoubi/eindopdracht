@@ -27,7 +27,7 @@ $conn = new Database();
     <main>
         <h1>Welkom bij Car 4 YOU</h1>
         </video>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/s-m6xj-uRvA?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <iframe width="700" height="400" src="https://www.youtube.com/embed/s-m6xj-uRvA?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         <article>
             <p><strong>Wat is Car 4 You?</strong></p>
             <p>Car 4 you is een platform dat je in staat stelt om verhuuren van auto's.</p>

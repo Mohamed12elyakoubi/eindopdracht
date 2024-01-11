@@ -34,17 +34,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $aantalDagen = (strtotime($eindVerhuurdatum) - strtotime($startVerhuurdatum)) / (60 * 60 * 24);
         $kosten = $prijs * $aantalDagen;
 
-        // Controleer eerst of de auto beschikbaar is voor de opgegeven periode
         $gereserveerdeAutoIDs = $conn->getGereserveerdeAutoIDsVoorDatumBereik($startVerhuurdatum, $eindVerhuurdatum);
         if (!in_array($autoID, $gereserveerdeAutoIDs)) {
-            // Auto is beschikbaar, voeg reservering toe
             if ($conn->addReservation($startVerhuurdatum, $eindVerhuurdatum, $autoID, $klantID, $kosten)) {
                 echo "<div class='success-message'>Reservering succesvol toegevoegd. Kosten: € {$kosten}</div>";
             } else {
                 echo "<div class='error-message'>Er is een fout opgetreden bij het toevoegen van de reservering.</div>";
             }
         } else {
-            // Auto is niet beschikbaar
             echo "<div class='error-message'>De geselecteerde auto is niet beschikbaar voor de opgegeven periode.</div>";
         }
     } else {
@@ -52,6 +49,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
+$beschikbareAuto = $conn->getBeschikbareAuto();
+$carCount = 0;
 ?>
 
 <!DOCTYPE html>
@@ -67,33 +66,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="./css/klant.css">
 
 </head>
-<h1 > Welcome <?php echo $klantNaam; ?></h1>
+<h1> Welcome <?php echo $klantNaam; ?></h1>
 <header>
-        <nav>
-            <input type="checkbox" id="hamburger" />
-            <label for="hamburger" class="hamburger_btn">
-                <span></span>
-            </label>
+    <nav>
+        <input type="checkbox" id="hamburger" />
+        <label for="hamburger" class="hamburger_btn">
+            <span></span>
+        </label>
 
-            <ul class="hamburger_menu">
+        <ul class="hamburger_menu">
             <a href="klant_panel.php"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-bar-left" id="backtohome" style="margin-left:70px" color="green" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5M10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5" />
                 </svg></a>
-                <li> <a class="menu_item" href="gegevens.php">Gegevens</a></li>
-                <li> <a class="menu_item" href="verhuring.php">Auto verhuren</a></li>
-                <li> <a class="menu_item" href="view_beschikbaar_auto's _klant.php">beschikbare Auto's</a></li>
-                <li> <a class="menu_item" href="auto's.php">Auto's</a></li>
-                <li> <a class="menu_item" href="factuur.php">Factuur</a></li>
-                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-power" id="logoutBtn" style="margin-top: 250px; margin-left:70px" color="red" viewBox="0 0 16 16">
-                    <path d="M7.5 1v7h1V1z" />
-                    <path d="M3 8.812a4.999 4.999 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812" />
-                </svg>
-            </ul>
-        </nav>
-    </header>
+            <li> <a class="menu_item" href="gegevens.php">Gegevens</a></li>
+            <li> <a class="menu_item" href="verhuring.php">Auto verhuren</a></li>
+            <li> <a class="menu_item" href="auto's.php">Auto's</a></li>
+            <li> <a class="menu_item" href="factuur.php">Factuur</a></li>
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-power" id="logoutBtn" style="margin-top: 250px; margin-left:70px" color="red" viewBox="0 0 16 16">
+                <path d="M7.5 1v7h1V1z" />
+                <path d="M3 8.812a4.999 4.999 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812" />
+            </svg>
+        </ul>
+    </nav>
+</header>
 
 <body>
-<div class="container">
+    <div class="container" id="reserveer-sectie">
         <div class="header">
             <h1>Auto verhuren</h1>
         </div>
@@ -104,26 +102,56 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 <input type="hidden" id="prijs" value="<?= $prijs ?>">
 
-                <select name="autoID" required class="form-select form-select-sm">
-                    <option value="" disabled>Selecteer een auto</option>
-                    <?php
-                    // Haal gereserveerde auto-ID's op voor het geselecteerde verhuurperiode
-                    $gereserveerdeAutoIDs = $conn->getGereserveerdeAutoIDsVoorDatumBereik($startVerhuurdatum, $eindVerhuurdatum);
-                    // Haal beschikbare auto's op
-                    $autoResult = $conn->haalAlleBeschikbareAutosOp($gereserveerdeAutoIDs);
-
-                    foreach ($autoResult as $auto) {
-                        echo "<option value='{$auto['AutoID']}'>
-                        <strong>{$auto['Name']}  <br>- <strong>Prijs:</strong> € {$auto['Prijs']} per dag
-                              </option>";
-                    }
-                    ?>
-                </select>
-
+                <input type="hidden" name="autoID" id="autoID" required readonly>
                 <button type="submit" class="btn btn-warning">Reserveer</button>
+
+
+
             </form>
         </div>
     </div>
+    <h1>Beschikbare Auto's</h1>
+    <?php
+    foreach ($beschikbareAuto as $carData) {
+        if ($carCount % 4 === 0) {
+            echo '<div class="row">';
+        }
+
+    ?>
+        <div class="cars_b">
+            <h2><?php echo $carData['Name']; ?></h2>
+            <p>Merk: <?php echo $carData['Merk']; ?></p>
+            <p>Model: <?php echo $carData['Model']; ?></p>
+            <p>Jaar: <?php echo $carData['Jaar']; ?></p>
+            <p>Kilometerstand: <?php echo $carData['kmafstand']; ?> km</p>
+            <p>Kleur: <?php echo $carData['Color']; ?></p>
+            <p>Transmissie: <?php echo $carData['Transmissie']; ?></p>
+            <p>Prijs: € <?php echo $carData['Prijs']; ?> per dag</p>
+            <img src="<?= $carData['imagename'] ?>" />
+            <br>
+            <div class="kenteken2">
+                <div class="inset2">
+                    <div class="blue2"></div>
+                    <input type="text" value="<?php echo $carData['Kenteken']; ?>" disabled />
+                </div>
+            </div>
+            <br>
+            <button class="reserve-button btn btn-success" data-auto-id="<?php echo $carData['AutoID']; ?>" data-auto-name="<?php echo $carData['Name']; ?>">
+                Reserveer nu
+            </button>
+        </div>
+
+    <?php
+        $carCount++;
+        if ($carCount % 4 === 0) {
+            echo '<br></div>';
+        }
+    }
+
+    if ($carCount % 4 !== 0) {
+        echo '</div>';
+    }
+    ?>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         $(document).ready(function() {
@@ -133,19 +161,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             });
         });
 
-    document.addEventListener("DOMContentLoaded", function() {
-        var successMessage = document.querySelector('.success-message');
-        var errorMessage = document.querySelector('.error-message');
+        document.addEventListener("DOMContentLoaded", function() {
+            var successMessage = document.querySelector('.success-message');
+            var errorMessage = document.querySelector('.error-message');
 
-        setTimeout(function() {
-            if (successMessage) {
-                successMessage.style.display = 'none';
-            }
-            if (errorMessage) {
-                errorMessage.style.display = 'none';
-            }
-        }, 5000);
-    });
+            setTimeout(function() {
+                if (successMessage) {
+                    successMessage.style.display = 'none';
+                }
+                if (errorMessage) {
+                    errorMessage.style.display = 'none';
+                }
+            }, 5000);
+        });
+        $(document).ready(function() {
+            $(".reserve-button").click(function() {
+                var autoID = $(this).data('auto-id');
+                var autoName = $(this).data('auto-name');
+
+                $("#autoID").val(autoID);
+                $('html, body').animate({
+                    scrollTop: $("#reserveer-sectie").offset().top
+                }, 1000);
+                console.log("Geselecteerde auto: ID=" + autoID + ", Naam=" + autoName);
+            });
+        });
     </script>
 </body>
 

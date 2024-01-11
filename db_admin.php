@@ -13,7 +13,7 @@ class Database
         $this->host = 'localhost:3306';
         $this->user = 'root';
         $this->pass = '';
-        $this->db = 'eindopdracht';
+        $this->db = 'sui';
 
         $conn = "mysql:host=$this->host;dbname=$this->db";
         $this->conn = new PDO($conn, $this->user, $this->pass);

@@ -52,7 +52,6 @@ if ($userData) {
                 </svg></a>
                 <li> <a class="menu_item" href="gegevens.php">Gegevens</a></li>
                 <li> <a class="menu_item" href="verhuring.php">Auto verhuren</a></li>
-                <li> <a class="menu_item" href="view_beschikbaar_auto's _klant.php">beschikbare Auto's</a></li>
                 <li> <a class="menu_item" href="auto's.php">Auto's</a></li>
                 <li> <a class="menu_item" href="factuur.php">Factuur</a></li>
                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-power" id="logoutBtn" style="margin-top: 250px; margin-left:70px" color="red" viewBox="0 0 16 16">

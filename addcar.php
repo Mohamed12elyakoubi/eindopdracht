@@ -75,7 +75,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <input type="date" id="year" name="jaar" required><br />
 
         <label for="kenteken">Kenteken:</label> <br>
-        <input type="text" id="kenteken" name="kenteken" required> <br>
+               <div class="kenteken2">
+                <div class="inset2">
+                    <div class="blue2"></div>
+                    <input type="text" name="kenteken" />
+                </div>
+            </div>
 
         <label for="kmafstand">Km-afstand: </label><br />
         <input type="number" min="0" step=".01" id="kmafstand" name="kmafstand" required><br />

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 05 jan 2024 om 16:40
+-- Gegenereerd op: 11 jan 2024 om 23:11
 -- Serverversie: 10.4.27-MariaDB
 -- PHP-versie: 8.1.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `eindopdracht`
+-- Database: `sui`
 --
 
 -- --------------------------------------------------------
@@ -75,7 +75,12 @@ INSERT INTO `auto` (`AutoID`, `Name`, `Merk`, `Model`, `type`, `Jaar`, `Kenteken
 (21, 'Mercedes-Benz GLC Coupe', 'Mercedes', 'GLC 350e ', 'suv', '2021-10-20', 'TX-844-T', 30500, 'Zwart', 'Automaat', 'Diesel', 130, 'img/GLC (1).JPG'),
 (22, 'Audi RS7 Sportback', 'Audi', 'RS 7', 'sedan', '2022-10-10', 'RS-781-1', 10000, 'Zwart', 'Automaat', 'Benzine', 250, 'img/rs7 (1).png'),
 (23, 'Seat Ibiza 1.4 TDI', 'Seat', 'Ibiza', 'Hatchback', '2019-02-10', 'WJ-191-0', 24050, 'Wit', 'Automaat', 'Benzine', 50, 'img/ibiza1 (1).png'),
-(25, 'Ibiza 1.6 TDI', 'Seat', 'Ibiza', 'Hatchback', '2020-08-01', '8800 IHW', 40000, 'Dark Blue', 'Handschakel', 'Diesel', 40, 'img/seat 1(1).png');
+(25, 'Ibiza 1.6 TDI', 'Seat', 'Ibiza', 'Hatchback', '2020-08-01', '8800 IHW', 40000, 'Dark Blue', 'Handschakel', 'Diesel', 40, 'img/seat 1(1).png'),
+(26, 'Audi RS3 Sportback ABT', 'Audi', 'RS3 ABT', 'Hatchback', '2021-08-10', 'GG-12-01', 4000, 'Green Met', 'Automaat', 'Benzine', 450, 'img/rs3-lime.png'),
+(27, 'Bmw m5', 'BMW', 'M5', 'coupe', '2021-08-01', 'H-121-0H', 7000, 'Blauw', 'Automaat', 'Benzine', 300, 'img/bmwm5.png'),
+(28, 'Bmw X5 ', 'BMW', 'X5', 'suv', '2018-02-01', 'HN-010-k', 40000, 'Wit', 'Automaat', 'Diesel', 190, 'img/bmwx.png'),
+(29, 'Supra', 'Toyota', 'MK4', 'Hatchback', '2020-08-01', 'FA-012-0', 4000, 'Wit', 'Automaat', 'Benzine', 320, 'img/supra.png'),
+(30, 'Jetta A2', 'VW', 'jetta', 'sedan', '1987-07-01', 'JE-T11-2', 857802, 'Rood', 'Handschakel', 'Benzine', 700, 'img/jettaaa.png');
 
 -- --------------------------------------------------------
 
@@ -101,10 +106,8 @@ CREATE TABLE `klanten` (
 --
 
 INSERT INTO `klanten` (`KlantID`, `Klant_naam`, `klant_achternaam`, `birthday`, `Adres`, `Rijbewijsnummer`, `Telefoonnummer`, `email`, `password`, `AanmaakDatum`) VALUES
-(4, 'Ayoub', 'El JR', '2001-02-12', 'mercatorplein 13-1 Amsterdam', '561830012', '672838192', 'admin@admin.com', '$2y$10$PJreMoWyE9RTgyHIZjka4OiqyqJVU9SjsRE63n6eW7FsVC1M8Q7Wu', '2023-12-24'),
-(5, 'klant1', 'klant11', '2005-12-12', 'Bart van Hovestraat 1-1', '2113453555', '7818267182', 'klant1@gmail.com', '$2y$10$0q8PTfA4UAkZb70VC.LHm.10D8LKsExmX4LKOhDYbFM6rH7mhPxqS', '2023-12-25'),
 (7, 'code is', 'hala', '2007-01-08', 'anastraat 13-1', '000000000', '675282637', 'code@gmail.com', '$2y$10$Rh30TVRExVMnvElzDKpIi.j54qvH6duc/PoTrmO6trGSYnaL23xRu', '2023-12-27'),
-(9, 'Klant', 'De beste', '1987-02-12', 'Bart van heren 1-1 amsterdam1325', '182966819', '675858514', 'klant69@gmail.com', '$2y$10$u3F6pvIyG6o.1c.JOYnxKezIWa7jbKGHQm3gc3vftr2QkonPVbUMu', '2024-01-05');
+(10, 'Mohamed', 'klant', '2004-02-01', 'mercatorplein 13-1 Amsterdam', '5671829219', '687989245', 'elyakoubi412@gmail.com', '$2y$10$rKmXPho9l5ZTaBeHTDjMIemzjq5/2.qcHLEdbjBLG4g601cnz3.MG', '2024-01-11');
 
 -- --------------------------------------------------------
 
@@ -126,8 +129,9 @@ CREATE TABLE `verhuringen` (
 --
 
 INSERT INTO `verhuringen` (`VerhuurID`, `StartVerhuurdatum`, `EindVerhuurdatum`, `KlantID`, `AutoID`, `Kosten`) VALUES
-(4, '2024-01-04', '2024-01-27', 7, 25, 920),
-(8, '2024-01-05', '2024-01-12', 5, 21, 910);
+(12, '2024-01-11', '2024-01-19', 7, 19, 1200),
+(13, '2024-01-11', '2024-01-19', 7, 20, 560),
+(14, '2024-01-11', '2024-01-19', 10, 21, 1040);
 
 --
 -- Triggers `verhuringen`
@@ -189,19 +193,19 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT voor een tabel `auto`
 --
 ALTER TABLE `auto`
-  MODIFY `AutoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `AutoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT voor een tabel `klanten`
 --
 ALTER TABLE `klanten`
-  MODIFY `KlantID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `KlantID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT voor een tabel `verhuringen`
 --
 ALTER TABLE `verhuringen`
-  MODIFY `VerhuurID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `VerhuurID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Beperkingen voor geëxporteerde tabellen

@@ -4,7 +4,7 @@ $conn = new Database();
 $beschikbareAuto = $conn->getBeschikbareAuto();
 $carCount = 0;
 
-    ?>
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,17 +17,17 @@ $carCount = 0;
 </head>
 
 <body>
-<header>
+    <header>
 
-            <input type="checkbox" id="hamburger"/>
-            <label for="hamburger" class="hamburger_btn">
-                <span></span>
-            </label>
+        <input type="checkbox" id="hamburger" />
+        <label for="hamburger" class="hamburger_btn">
+            <span></span>
+        </label>
 
-            <ul class="hamburger_menu">
-                <li> <a class="menu_item" href="view_verhuurde_auto.php">Verhuurde Auto's</a></li>
-                <li> <a class="menu_item" href="adminpanel.php">Medewerkers Portaal</a></li>
-            </ul>
+        <ul class="hamburger_menu">
+            <li> <a class="menu_item" href="view_verhuurde_auto.php">Verhuurde Auto's</a></li>
+            <li> <a class="menu_item" href="adminpanel.php">Medewerkers Portaal</a></li>
+        </ul>
 
     </header>
 
@@ -42,13 +42,18 @@ $carCount = 0;
             <p>Merk: <?php echo $carData['Merk']; ?></p>
             <p>Model: <?php echo $carData['Model']; ?></p>
             <p>Jaar: <?php echo $carData['Jaar']; ?></p>
-            <p>Kenteken: <?php echo $carData['Kenteken']; ?></p>
             <p>Kilometerstand: <?php echo $carData['kmafstand']; ?> km</p>
             <p>Kleur: <?php echo $carData['Color']; ?></p>
             <p>Transmissie: <?php echo $carData['Transmissie']; ?></p>
             <p>Prijs: € <?php echo $carData['Prijs']; ?> per dag</p>
             <img src="<?= $carData['imagename'] ?>" />
             <br>
+            <div class="kenteken2" style="margin-left: 30px;">
+                <div class="inset2">
+                    <div class="blue2"></div>
+                    <input type="text" value="<?php echo $carData['Kenteken']; ?>" disabled />
+                </div>
+            </div>
         </div>
 
     <?php
@@ -75,4 +80,5 @@ $carCount = 0;
     </script>
 
 </body>
+
 </html>
