@@ -345,4 +345,20 @@
 
                 return $stmt->fetchAll(PDO::FETCH_ASSOC);
             }
+            public function heeftKlantReservering($klantID)
+            {
+                try {
+                    $stmt = $this->conn->prepare("SELECT COUNT(*) as count FROM verhuringen WHERE KlantID = :klantID");
+                    $stmt->bindParam(':klantID', $klantID, PDO::PARAM_INT);
+                    $stmt->execute();
+
+                    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                    return ($result['count'] > 0);
+                } catch (PDOException $e) {
+                    echo "Error: " . $e->getMessage();
+                    return false;
+                }
+            }
         }
+        ?>

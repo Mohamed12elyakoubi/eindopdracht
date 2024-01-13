@@ -46,7 +46,6 @@ $data = $conn->getAllCars();
                 <th>Transmissie</th>
                 <th>Brandstof</th>
                 <th>Prijs</th>
-                <th>photo</th>
                 <th colspan="3">Action</th>
             </tr>
         </thead>
@@ -65,7 +64,6 @@ $data = $conn->getAllCars();
                     echo "<td>" . $da['Transmissie'] . "</td>";
                     echo "<td>" . $da['Brandstof'] . "</td>";
                     echo "<td>" . $da['Prijs'] . "</td>";
-                    echo "<td>" . $da['imagename'] . "</td>";
                     echo "<td><a href='update_cars.php?id={$da['AutoID']}' class='btn btn-info'>Bewerken</a></td>";
                     echo "<td><a href='addcar.php'class='btn btn-success'>Toevoegen</a></td>";
                     echo "<td><a href='delete_car.php?id={$da['AutoID']}' class='btn btn-danger'>Verwijderen</a></td>";

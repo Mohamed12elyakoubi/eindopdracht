@@ -5,7 +5,8 @@ session_start();
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     header("location: admin_out.php");
     exit();
-}header("Cache-Control: no-cache, no-store, must-revalidate");
+}
+header("Cache-Control: no-cache, no-store, must-revalidate");
 header("Pragma: no-cache");
 header("Expires: 0");
 
@@ -27,7 +28,9 @@ $name = $admindata['name']
 
 </head>
 
-<body>
+<body style="background-color: #F4D03F;
+background-image: linear-gradient(132deg, #F4D03F 0%, #16A085 100%);
+">
 <header>
 
             <input type="checkbox" id="hamburger"/>

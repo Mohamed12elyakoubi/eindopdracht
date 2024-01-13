@@ -38,7 +38,9 @@ if ($userData) {
 
 </head>
 
-<body>
+<body style="background: rgb(110,253,178);
+background: radial-gradient(circle, rgba(110,253,178,1) 0%, rgba(110,184,227,0.6867997198879552) 36%, rgba(133,181,218,1) 50%, rgba(95,81,251,0.8772759103641457) 100%);"
+>
     <header>
         <nav>
             <input type="checkbox" id="hamburger" />

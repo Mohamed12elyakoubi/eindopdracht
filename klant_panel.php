@@ -44,7 +44,9 @@ $resterendeDagen = $huidigeDatum->diff($eindVerhuurdatum)->format("%a");
 
 </head>
 
-<body>
+<body style="background-color: #85FFBD;
+background-image: linear-gradient(45deg, #85FFBD 9%, #FFFB7D 28%, #48eb43 49%, #6c82f3 95%);
+">
     <h1> Welcome <?php echo $klantNaam; ?></h1>
     <header>
         <nav>

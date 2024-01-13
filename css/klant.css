@@ -165,8 +165,10 @@
     width: calc(25% - 20px);
     max-width: 390px;
     box-sizing: border-box;
-    margin-top: 70px;
-    margin-left: 620px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    flex-wrap: wrap;
 }
 .car-reserved:hover {
     transform: scale(1.05);
@@ -200,7 +202,7 @@ img {
 }
 /* error? */
 .success-message,
-.error-message {
+.error-message, .factuur-message {
     background-color: #d4edda;
     color: #21993d;
     padding: 10px;

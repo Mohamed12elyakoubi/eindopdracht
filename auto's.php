@@ -20,7 +20,8 @@ foreach ($carsData as $carData) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 </head>
 
-<body>
+<body style="background: rgb(110,253,129);
+background: radial-gradient(circle, rgba(110,253,129,0.768032212885154) 0%, rgba(110,227,214,0.6867997198879552) 36%, rgba(133,181,218,1) 50%, rgba(73,75,197,0.8772759103641457) 100%);">
     <header>
         <nav>
             <input type="checkbox" id="hamburger" />

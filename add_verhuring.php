@@ -23,6 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (!in_array($autoID, $gereserveerdeAutoIDs)) {
             if ($conn->addReservation($startVerhuurdatum, $eindVerhuurdatum, $autoID, $klantID, $kosten)) {
                 echo "<div class='success-message'>Reservering succesvol toegevoegd. Kosten: € {$kosten}</div>";
+                echo "<div class='factuur-message'>Je wordt zo naar uw factuur gestuurd";
             } else {
                 echo "<div class='error-message'>Er is een fout opgetreden bij het toevoegen van de reservering.</div>";
             }
@@ -97,7 +98,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <label for="EindeVerhuurdatum">Einde Verhuurdatum:</label>
         <input type="date" name="EindeVerhuurdatum" id="eindDatum" required>
 
-        <button type="submit" class="btn btn-warning">Reserveer</button>
+        <button type="submit" class="btn btn-warning">Reserveer</button><br>
+        <td><a href='add_klant.php' class='btn btn-success'>Klant Toevoegen</a></td>
     </form>
     </div>
     </div>

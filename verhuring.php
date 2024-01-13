@@ -33,21 +33,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($prijs !== null) {
         $aantalDagen = (strtotime($eindVerhuurdatum) - strtotime($startVerhuurdatum)) / (60 * 60 * 24);
         $kosten = $prijs * $aantalDagen;
+        $klantHeeftReservering = $conn->heeftKlantReservering($klantID);
+        if (!$klantHeeftReservering) {
 
-        $gereserveerdeAutoIDs = $conn->getGereserveerdeAutoIDsVoorDatumBereik($startVerhuurdatum, $eindVerhuurdatum);
-        if (!in_array($autoID, $gereserveerdeAutoIDs)) {
-            if ($conn->addReservation($startVerhuurdatum, $eindVerhuurdatum, $autoID, $klantID, $kosten)) {
-                echo "<div class='success-message'>Reservering succesvol toegevoegd. Kosten: € {$kosten}</div>";
+            $gereserveerdeAutoIDs = $conn->getGereserveerdeAutoIDsVoorDatumBereik($startVerhuurdatum, $eindVerhuurdatum);
+            if (!in_array($autoID, $gereserveerdeAutoIDs)) {
+                if ($conn->addReservation($startVerhuurdatum, $eindVerhuurdatum, $autoID, $klantID, $kosten)) {
+                    echo "<div class='success-message'>Reservering succesvol toegevoegd. Kosten: € {$kosten} <br>
+                     Uw factuur gemaakt, U wordt zo gestuurd </div>";
+                    echo '<script>
+                setTimeout(function(){
+                    window.location.href = "factuur.php";
+                }, 6000);
+            </script>';
+                } else {
+                    echo "<div class='error-message'>Er is een fout opgetreden bij het toevoegen van de reservering.</div>";
+                }
             } else {
-                echo "<div class='error-message'>Er is een fout opgetreden bij het toevoegen van de reservering.</div>";
+                echo "<div class='error-message'>De geselecteerde auto is niet beschikbaar voor de opgegeven periode.</div>";
+            }
+        }else{
+                echo "<div class='error-message'>U heeft al een actieve reservering. U kunt niet nog een auto reserveren.</div>";
+
             }
         } else {
-            echo "<div class='error-message'>De geselecteerde auto is niet beschikbaar voor de opgegeven periode.</div>";
+            echo "<div class='error-message'>Fout bij het ophalen van de prijs van de auto.</div>";
         }
-    } else {
-        echo "<div class='error-message'>Fout bij het ophalen van de prijs van de auto.</div>";
     }
-}
 
 $beschikbareAuto = $conn->getBeschikbareAuto();
 $carCount = 0;
@@ -66,6 +78,9 @@ $carCount = 0;
     <link rel="stylesheet" href="./css/klant.css">
 
 </head>
+<body style="background: rgb(180,180,180);
+background: linear-gradient(90deg, rgba(180,180,180,0.8464635854341737) 0%, rgba(255,255,255,0) 14%, rgba(255,252,252,0.34226190476190477) 36%, rgba(255,255,255,0.8016456582633054) 82%, rgba(180,180,180,1) 97%);">
+    
 <h1> Welcome <?php echo $klantNaam; ?></h1>
 <header>
     <nav>
@@ -90,7 +105,6 @@ $carCount = 0;
     </nav>
 </header>
 
-<body>
     <div class="container" id="reserveer-sectie">
         <div class="header">
             <h1>Auto verhuren</h1>
@@ -103,6 +117,7 @@ $carCount = 0;
                 <input type="hidden" id="prijs" value="<?= $prijs ?>">
 
                 <input type="hidden" name="autoID" id="autoID" required readonly>
+                <input type="text" id="selectedAutoName" name="selectedAutoName" value="Geen auto geselcteerd" readonly>
                 <button type="submit" class="btn btn-warning">Reserveer</button>
 
 
@@ -178,13 +193,15 @@ $carCount = 0;
             $(".reserve-button").click(function() {
                 var autoID = $(this).data('auto-id');
                 var autoName = $(this).data('auto-name');
+                $("#selectedAutoName").val(autoName);
 
                 $("#autoID").val(autoID);
                 $('html, body').animate({
                     scrollTop: $("#reserveer-sectie").offset().top
                 }, 1000);
-                console.log("Geselecteerde auto: ID=" + autoID + ", Naam=" + autoName);
             });
+            console.log("Geselecteerde auto: ID=" + autoID + ", Naam=" + autoName);
+
         });
     </script>
 </body>

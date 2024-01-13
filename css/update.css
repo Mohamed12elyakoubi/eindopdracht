@@ -5,7 +5,8 @@ body {
     height: 100vh;
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    background-color: #f2f7ff;
+    background: rgb(110, 253, 178);
+    background: radial-gradient(circle, rgba(110, 253, 178, 1) 0%, rgba(133, 181, 218, 1) 50%, rgba(95, 81, 251, 0.8772759103641457) 100%);
 }
 
 .container {
@@ -34,7 +35,8 @@ form.update h2 {
     color: #1e88e5;
 }
 
-form.update input, select {
+form.update input,
+select {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
@@ -43,6 +45,7 @@ form.update input, select {
     border-radius: 5px;
     font-size: 15px;
 }
+
 form.update select {
     width: 120%;
     padding: 10px;
@@ -69,6 +72,7 @@ form.update button {
 form.update button:hover {
     background-color: #1565c0;
 }
+
 .p-3,
 .mb-2,
 .bg-primary,
@@ -79,6 +83,7 @@ form.update button:hover {
     margin-left: 80px;
     margin-bottom: 30px;
 }
+
 /* code voor update cars */
 
 form.cars {
@@ -96,7 +101,8 @@ form.cars h2 {
     color: #1e88e5;
 }
 
-form.cars input, select {
+form.cars input,
+select {
     width: 100%;
     padding: 10px;
     margin-bottom: 5px;
@@ -105,6 +111,7 @@ form.cars input, select {
     border-radius: 5px;
     font-size: 15px;
 }
+
 form.cars select {
     margin-bottom: 10px;
     box-sizing: border-box;
