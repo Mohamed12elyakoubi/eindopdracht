@@ -13,22 +13,18 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 $klantID = $_SESSION['klantID'];
 $reservedCars = $conn->gereserveerdeauto($klantID);
 
-
-$userData = $conn->getUser($klantID);
-if ($userData) {
-} else {
-    $klantNaam = "Gebruiker";
-}
-
-$klantID = $_SESSION['klantID'];
 $userData = $conn->getUser($klantID);
 $klantNaam = ($userData) ? $userData['Klant_naam'] . ' ' . $userData['klant_achternaam'] : "Gebruiker";
 
 $klantID = $_SESSION['klantID'];
 $data = $conn->verhuring($klantID);
-$eindVerhuurdatum = new DateTime($data['EindVerhuurdatum']);
-$huidigeDatum = new DateTime();
-$resterendeDagen = $huidigeDatum->diff($eindVerhuurdatum)->format("%a");
+$resterendeDagen = 0;
+
+if ($data) {
+    $eindVerhuurdatum = new DateTime($data['EindVerhuurdatum']);
+    $huidigeDatum = new DateTime();
+    $resterendeDagen = $huidigeDatum->diff($eindVerhuurdatum)->format("%a");
+}
 
 ?>
 
@@ -69,9 +65,9 @@ background-image: linear-gradient(45deg, #85FFBD 9%, #FFFB7D 28%, #48eb43 49%, #
     </header>
 
     <h1>Uw gereserveerde auto</h1>
-    <?php if ($reservedCars) : ?>
+    <?php if (is_array($reservedCars)) : ?>
         <div class="car-reserved">
-        <h2><?php echo $reservedCars['Name']; ?></h2>
+            <h2><?php echo $reservedCars['Name']; ?></h2>
             <p><strong>Merk:</strong> <?php echo $reservedCars['Merk']; ?></p>
             <p><strong>Model:</strong> <?php echo $reservedCars['Model']; ?></p>
             <p><strong>Jaar:</strong> <?php echo $reservedCars['Jaar']; ?></p>
@@ -86,30 +82,19 @@ background-image: linear-gradient(45deg, #85FFBD 9%, #FFFB7D 28%, #48eb43 49%, #
                     <input type="text" value="<?php echo $reservedCars['Kenteken']; ?>" disabled />
                 </div>
             </div>
-           <strong> <p>Resterende dagen: <?php echo $resterendeDagen; ?> dagen</p></strong>
+            <strong><p>Resterende dagen: <?php echo $resterendeDagen; ?> dagen</p></strong>
             <br>
-            
         </div>
     <?php else : ?>
         <h2 style="display: flex; justify-content:center; ">Geen auto gevonden</h2>
     <?php endif; ?>
-    
-    <?php
-    $carCount++;
-    if ($carCount % 4 === 0) {
-        echo '</div>';
-    }
 
-    if ($carCount % 4 !== 0) {
-        echo '</div>';
-    }
-    ?>
     <br>
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $("#logoutBtn").click(function() {
+        $(document).ready(function () {
+            $("#logoutBtn").click(function () {
                 var form = $('<form action="uitloggen.php" method="post"></form>');
                 form.appendTo('body').submit();
             });
